@@ -1,0 +1,21 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1533_899)">
+<path d="M0 18C0 8.05887 8.05887 0 18 0V0C27.9411 0 36 8.05887 36 18V18C36 27.9411 27.9411 36 18 36V36C8.05887 36 0 27.9411 0 18V18Z" fill="#F93939"/>
+<path d="M45.6 0H4.8C2.14903 0 0 2.14903 0 4.8V31.2C0 33.851 2.14903 36 4.8 36H45.6C48.251 36 50.4 33.851 50.4 31.2V4.8C50.4 2.14903 48.251 0 45.6 0Z" fill="#F93939"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 9.6001H50.4V26.4001H0V9.6001Z" fill="#FFDA2C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.6001 14.933V20.981C21.6001 22.661 19.9873 24.005 18.0001 24.005H13.2001C11.2177 24.0002 9.6001 22.649 9.6001 20.9762V14.9282C9.6001 13.5554 10.6753 12.4082 12.1537 12.0362C12.6001 10.7882 13.9729 11.9066 15.6001 11.9066C17.2369 11.9066 18.6001 10.7954 19.0465 12.0386C20.5201 12.4202 21.6001 13.5698 21.6001 14.933Z" fill="#D4AF2C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.6 16.7998H24V23.9998H21.6V16.7998ZM7.19995 16.7998H9.59995V23.9998H7.19995V16.7998Z" fill="#CBCBCB"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.6 21.6001H24V24.0001H21.6V21.6001ZM7.19995 21.6001H9.59995V24.0001H7.19995V21.6001Z" fill="#1A47B8"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.6 14.3999H24V16.7999H21.6V14.3999ZM7.19995 14.3999H9.59995V16.7999H7.19995V14.3999Z" fill="#D4AF2C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 14.3999H14.4V17.9999H12V14.3999ZM16.8 19.1999H19.2V22.7999H16.8V19.1999Z" fill="#AF010D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.8 14.3999H19.2V17.9999H16.8V14.3999Z" fill="#AE6A3E"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 19.2002H14.4V22.8002H12V19.2002Z" fill="#FFDA2C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.4 14.4L12 12H19.2L16.8 14.4H14.4Z" fill="#AF010D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.3999 9.6001H16.7999V12.0001H14.3999V9.6001Z" fill="#D4AF2C"/>
+</g>
+<defs>
+<clipPath id="clip0_1533_899">
+<path d="M0 18C0 8.05887 8.05887 0 18 0V0C27.9411 0 36 8.05887 36 18V18C36 27.9411 27.9411 36 18 36V36C8.05887 36 0 27.9411 0 18V18Z" fill="white"/>
+</clipPath>
+</defs>
+</svg>
