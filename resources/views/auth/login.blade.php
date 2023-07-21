@@ -38,6 +38,27 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="usertype" class="col-md-4 col-form-label text-md-end">{{ __('User Type') }}</label>
+
+                            <div class="form-check">
+            <input class="form-check-input" type="radio" name="usertype" id="client" value="client">
+            <label class="form-check-label" for="client">
+                Client
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="usertype" id="vendor" value="vendor">
+            <label class="form-check-label" for="vendor">
+                Vendor
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="WebMaster" id="WebMaster" value="WebMaster">
+            <label class="form-check-label" for="WebMaster">
+                WebMaster
+            </label>
+        </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
