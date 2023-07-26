@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link href="./node_modules/admin-lte/dist/css/adminlte.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -71,11 +71,7 @@
                 </div>
             </div>
         </nav>
- <div class="row">
-            <div class="col-md-8 mx-auto my-4">
-                @include('layouts.alerts')
-            </div>
-        </div>
+
         <main class="py-4">
             @yield('content')
         </main>

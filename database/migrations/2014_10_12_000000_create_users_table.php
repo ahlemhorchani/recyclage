@@ -21,8 +21,8 @@ return new class extends Migration
             $table->boolean('active')->default(0);
             $table->string('code')->nullable();
             $table->string('username',10)->unique();
-            $table->string('phonenumber',)->unique();
-            $table->enum('usertype',['client','vendor','WebMaster'] )->unique();
+            $table->string('userphone',)->unique();
+            $table->enum('usertype',['client','vendor'] );
             $table->rememberToken();
             $table->timestamps();
         });

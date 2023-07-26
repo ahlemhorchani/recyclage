@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -46,3 +47,7 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 Route::get('/admin/products', [AdminController::class,'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [AdminController::class,'getOrders'])->name('admin.orders');
 //orders routes
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
