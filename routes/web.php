@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CatalogueProduitsController;
+use App\Http\Controllers\AjouterCategorieProduitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::post('/SubmitLogin',[LoginController::class, 'Authenticate']);
 Route::get('/about',  [HomeController::class, 'index'])->name('home');
 Route::get('/activate/{code}', [HomeController::class, 'activateUserAccount'])->name('user.activate');
 Route::get('/resend/{email}', [HomeController::class, 'resendActivationCode'])->name('code.resend');
 //products routes
 Route::resource('products', 'ProductController');
 Route::get('products/category/{category}', [HomeController::class, 'getProductByCategory'])->name("category.products");
-//products routes
-Route::resource('products', 'ProductController');
-Route::get('products/category/{category}', [HomeController::class,'getProductByCategory'])->name("category.products");
 //cart routes
 Route::get('/cart', [CartController::class,'index'])->name('cart.index');
 Route::post('/add/cart/{product}', [CartController::class ,'addProductToCart'])->name('add.cart');
@@ -47,7 +47,11 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 Route::get('/admin/products', [AdminController::class,'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [AdminController::class,'getOrders'])->name('admin.orders');
 //orders routes
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/catalogue-produits', [CatalogueProduitsController::class, 'index'])->name('catalogue-produits');
+    Route::get('/ajouter-categorie-produit', [AjouterCategorieProduitController::class, 'index'])->name('ajouter-categorie-produit');
+});
+// routes/web.php
+
+

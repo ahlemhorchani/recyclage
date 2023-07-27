@@ -97,8 +97,7 @@ class RegisterController extends Controller
         $user->save();
         //logout user
         $this->guard()->logout();
-        //send email to activate account
-        Mail::to($user)->send(new ActivateYourAccount($code));
+        
         //redirect user
         return redirect("/login")
             ->withInfo(" Veuillez confirmer votre email le lien est envoyé a votre addresse ");
