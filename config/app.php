@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 return [
 
@@ -168,6 +169,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laratrust\LaratrustServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+       
     ])->toArray(),
 
     /*
@@ -183,6 +187,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+ 
     ])->toArray(),
 
 ];

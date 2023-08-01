@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
         return view("admin.index")->with([
             "products" => Product::all(),
-            "orders" => Order::all()
+            "orders" => Cart::all()
         ]);
     }
 
@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function getOrders()
     {
         return view("admin.orders.index")->with([
-            "orders" => Order::latest()->paginate(5)
+            "orders" => Cart::latest()->paginate(5)
         ]);
     }
 }

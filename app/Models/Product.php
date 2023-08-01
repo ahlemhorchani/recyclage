@@ -16,7 +16,7 @@ class Product extends Model
         'inStock' ,
         'image',
         'certife' ,
-        'datecetif',
+        'datecetif','date_creation',
         'category_id'] ;
         public function getRouteKeyName()
         {
@@ -26,5 +26,12 @@ class Product extends Model
         public function category(){
             return $this->belongsTo(category::class);
         }
+        protected $table = 'products';
+
+        public static function getAllProducts()
+        {
+            return self::query()->orderBy('date_creation', 'desc')->get();
+        }
+    
     
 }

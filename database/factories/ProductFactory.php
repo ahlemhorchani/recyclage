@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'image' => $this->faker->imageUrl($width =640, $height=480),
             'certife' => $this->faker->boolean(),
             'datecetif' => $this->faker->date(),
+            'date_creation'=>$this->faker->nullable(),
             'category_id' => function () {
                 return category::factory()->create()->id;
             }

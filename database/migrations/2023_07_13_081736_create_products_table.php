@@ -23,7 +23,12 @@ return new class extends Migration
             $table->date('datecetif');
             $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
-            
+           
+ 
+        $table->date('date_creation')->nullable();
+   
+
+
             // foreign key constraint
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
