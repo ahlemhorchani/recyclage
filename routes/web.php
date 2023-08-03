@@ -66,28 +66,25 @@ Route::post('/cart/remove', [CartController::class, 'removeProductFromCart'])->n
 Route::post('/cart/update', [CartController::class, 'updateProductOnCart'])->name('update.cart');
 // routes/web.php
 
-// Route pour afficher la vue d'ajout de catégorie
-Route::get('/add-category', function () {
-    return view('ajouter-categorie-produit.add_category');
-})->name('add_category');
-
-// Route pour afficher la vue d'ajout de produit
-Route::get('/add-product', [ProductController::class, 'create'])->name('add_product');
-
-// Route pour la vue d'accueil (index)
+// Route pour afficher la vue d'accueil (index)
 Route::get('/ajouter-categorie-produit', function () {
     return view('ajouter-categorie-produit.index');
 })->name('ajouter_categorie_produit');
 
-// Route pour traiter le formulaire d'ajout de produit
-Route::post('/store-product', [ProductController::class, 'store'])->name('store_product');
-// routes/web.php
-// routes/web.php
+// Route pour afficher la vue d'ajout de catégorie
+Route::get('/add-category', function () {
+    return view('ajouter-categorie-produit.add_category');
+})->name('add-category');
+Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('add_category');
 
-Route::get('categories/{id}/edit', [ProductController::class,'edit'])->name('categories.edit');
+// Route pour afficher la vue d'ajout de produit
+Route::get('/add-product', [ProductController::class, 'create'])->name('add-product');
+Route::post('/add-product', [ProductController::class, 'store'])->name('store_product');
 
+// Autres routes liées au CategoryController et ProductController si nécessaires
+Route::put('/update-category/{category}', [CategoryController::class, 'update'])->name('updateCategory');
+Route::put('/update-product/{product}', [ProductController::class, 'updateProduct'])->name('updateProduct');
 
-Route::put('products/{id}', [ProductController::class,'updateProduct'])->name('update_product');
 
 
 

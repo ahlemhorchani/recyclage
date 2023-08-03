@@ -9,19 +9,13 @@
             <button class="btn btn-primary btn-lg btn-block" onclick="redirectTo('{{ route('add_category') }}')">Add Category</button>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-success btn-lg btn-block" onclick="redirectTo('{{ route('add_product') }}')">Add Product</button>
+            <button class="btn btn-success btn-lg btn-block" onclick="redirectTo('{{ route('add-product') }}')">Add Product</button>
         </div>
 
     </div>
-     <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-lg btn-block" onclick="redirectTo('{{ route('categories.update', $category->id) }}')">Update Category</button>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-success btn-lg btn-block" onclick="redirectTo('{{ route('update_product', $product->id) }}')">Update Product</button>
-        </div>
-        
-    </div>
+   
+</div>
+
 </div>
 
 <script>

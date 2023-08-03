@@ -13,20 +13,19 @@ class CategoryController extends Controller
      */
 
      public function addCategory(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:categories,slug', // unique in the 'categories' table
-        ]);
-        
-        $category = new Category();
-        $category->title = $request->input('title');
-        $category->slug = $request->input('slug');
-        $category->save();
-
-        return redirect()->route('categories.index')->with('success', 'Category added successfully.');
-    }
-
+     {
+         $request->validate([
+             'title' => 'required',
+             'slug' => 'required|unique:categories,slug', // unique in the 'categories' table
+         ]);
+     
+         $category = Category::create([
+             "title" => $request->input('title'),
+             "slug" => $request->input('slug'),
+         ]);
+     
+         return redirect()->route('categories.index')->with('success', 'Category added successfully.');
+     }
     public function index()
     {
         //
@@ -65,24 +64,31 @@ class CategoryController extends Controller
         return view('categories.edit', compact('category'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $category = Category::find($id);
+    
+  
+public function update(Request $request, $id)
+{
+    $category = Category::find($id);
 
-        $request->validate([
-            'title' => 'required',
-            'slug' => 'required',
-        ]);
-
-        $category->title = $request->input('libelle');
-        $category->slug = $request->input('slug');
-       
-
-        $category->save();
-
-        return redirect()->route('categories.index');
+    if (!$category) {
+        return redirect()->route('categories.index')
+            ->with('error', 'Category not found.');
     }
 
+    $request->validate([
+        'title' => 'required',
+        'slug' => 'required',
+    ]);
+
+    $category->update([
+        "title" => $request->input('title'),
+        "slug" => $request->input('slug'),
+    ]);
+
+    return redirect()->route('categories.index')
+        ->with('success', 'Category updated successfully.');
+
+}
     /**
      * Update the specified resource in storage.
      */

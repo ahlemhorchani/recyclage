@@ -30,6 +30,7 @@ class CartController extends Controller
             "qty" => (int)$prod[0]['qty'],
             
             "total"=>(double)$prod[0]['price']*(int)$request->all()['qty']
+            
            
         ));
         return redirect()->route("cart.index");

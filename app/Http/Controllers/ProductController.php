@@ -11,17 +11,10 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all(); // Retrieve all categories from the database
@@ -29,10 +22,6 @@ class ProductController extends Controller
         // Pass the categories to the view along with the form
         return view('ajouter-categorie-produit.ajouter_produit', compact('categories'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -57,7 +46,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->inStock = $request->input('inStock');
         $product->image = $filename;
-        $product->certifie = $request->has('certife') ? true : false; // Assuming 'certife' is a checkbox field
+        $product->certife = $request->has('certife') ? true : false; // Assuming 'certife' is a checkbox field
+        
         $product->datecetif = $request->input('datecetif');
         $product->category_id = $request->input('category_id');
         $product->date_creation = $request->input('date_creation'); // Assuming 'date_creation' is a date field
@@ -65,28 +55,19 @@ class ProductController extends Controller
     
         return redirect()->route('produits')->with('success', 'Product added successfully.');
     }
-    /**
-     * Display the specified resource.
-     */
+   
     public function show()
     {
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Product $product)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-   // VotreController.php
-
-// ...
+   
 
 public function updateProduct(Request $request, $id)
 {

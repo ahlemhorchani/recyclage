@@ -20,14 +20,16 @@
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
-                            <td>
-                                <img src="{{ asset($item->associatedModel->image) }}"
-                                    alt="{{ $item->name }}"
-                                    width="50"
-                                    height="50"
-                                    class="img-thumbnail"
-                                >
-                            </td>
+                           
+                        <td>
+                        <img src="{{ asset($item->associatedModel->image) }}"
+                             alt="{{ $item->product_name }}" <!-- Assuming $item has a 'product_name' field -->
+                              width="50"
+                              height="50"
+                              class="img-thumbnail"
+
+                        </td>
+
                             <td>{{ $item->name }}</td>
                             <td>
                                 <form class="form-inline" action="{{ route('update.cart', $item->associatedModel->slug) }}" method="post">

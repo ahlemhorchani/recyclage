@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2)->default(0);
             $table->integer('inStock')->default(0);
             $table->string('image');
-            $table->boolean('certife');
+            $table->boolean('certife')->nullable()->default(false);
             $table->date('datecetif');
             $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
