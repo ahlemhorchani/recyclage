@@ -14,7 +14,7 @@ class Cart extends Model
         'qty' ,
         'product_name' ,
         'total',
-        'price' ,
+        'price' ,'image',
         'paid','user_id'] ;
         public function user(){
             return $this->belongsTo(User::class);

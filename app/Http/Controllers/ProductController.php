@@ -13,8 +13,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-        //
+        $products = Product::all();
+    
+        return view('ajouter-categorie-produit.produits', compact('product'));
     }
+    
     public function create()
     {
         $categories = Category::all(); // Retrieve all categories from the database
@@ -28,8 +31,8 @@ class ProductController extends Controller
             'title' => 'required',
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation rule for the image
-            // Add validation rules for other fields if needed
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'datecetif'=>'required'
         ]);
     
         $filename = 'produit.png';
@@ -50,12 +53,16 @@ class ProductController extends Controller
         
         $product->datecetif = $request->input('datecetif');
         $product->category_id = $request->input('category_id');
-        $product->date_creation = $request->input('date_creation'); // Assuming 'date_creation' is a date field
+        $product->date_creation = date('Y-m-d H:i:s'); // Assuming 'date_creation' is a date field
         $product->save();
     
         return redirect()->route('produits')->with('success', 'Product added successfully.');
     }
-   
+    public function productList()
+    {
+        $products = Product::all(); // Suppose que vous avez un modèle "Product" pour les produits
+        return view('ajouter-categorie-produit.produits', compact('products'));
+    }
     public function show()
     {
         
@@ -69,12 +76,12 @@ class ProductController extends Controller
 
    
 
-public function updateProduct(Request $request, $id)
+public function updateProduct(Request $request,$id)
 {
-    // Validez les champs du formulaire ici
-
-    // Récupérez le produit à mettre à jour depuis la base de données
+    
+    $products = Product::all();
     $product = Product::find($id);
+
     
     // Mettez à jour les attributs du produit avec les nouvelles valeurs du formulaire
     $product->title = $request->input('title');
@@ -90,17 +97,19 @@ public function updateProduct(Request $request, $id)
     $product->save();
 
     // Redirigez l'utilisateur vers une autre page (par exemple, la liste des produits)
-    return redirect()->route('products.index');
+    return view('ajouter-categorie-produit.editprod', compact('product'));
 }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product,$id)
     {
-        //
-    }
-    
-    
+    $product = Product::findOrFail($id);
+  
+    $product->delete();
+
+    return redirect()->route('products')->with('success', 'product deleted successfully');
+}
 }

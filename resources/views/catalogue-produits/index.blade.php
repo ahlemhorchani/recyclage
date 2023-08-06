@@ -41,7 +41,7 @@
                             <!-- Affichage des produits -->
                             <div class="col-md-4 mb-4">
                                 <div class="card">
-                                    <img src="{{ $produit->image }}" class="card-img-top" alt="{{ $produit->title }}">
+                                    <img src="{{ url('upload/produit/'.$produit->image) }}" class="card-img-top" alt="{{ $produit->title }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $produit->title }}</h5>
                                         <p class="card-text">{{ $produit->description }}</p>
@@ -118,5 +118,4 @@ $(document).ready(function () {
         }
     });
 });
-
 </script>

@@ -1,16 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 card p-3">
-            <h4 class="text-dark mb-4">Your Cart</h4>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="thead-light">
+<div class="container py-2">
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <h4>Cart ({{ $items->count() }})</h4>
+
+    <div class="container">
+        <div class="row">
+            @if ($items->isEmpty())
+                <div class="alert alert-warning" role="alert">
+                    Your cart is empty!
+                    Start shopping <a class="btn btn-success btn-sm" href="{{ route('catalogue-produits.index') }}">Buy Products</a>
+                </div>
+            @else
+                @php
+                    $total = 0;
+                @endphp
+
+                <table class="table">
+                    <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">Image</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">Product Name</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Price</th>
                             <th scope="col">Total</th>
@@ -18,66 +35,64 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach ($items as $item)
-                        <tr>
-                           
-                        <td>
-                        <img src="{{ asset($item->associatedModel->image) }}"
-                             alt="{{ $item->product_name }}" <!-- Assuming $item has a 'product_name' field -->
-                              width="50"
-                              height="50"
-                              class="img-thumbnail"
-
-                        </td>
-
-                            <td>{{ $item->name }}</td>
-                            <td>
-                                <form class="form-inline" action="{{ route('update.cart', $item->associatedModel->slug) }}" method="post">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="input-group">
-                                        <input type="number" name="qty" id="qty"
-                                            value="{{ $item->quantity }}"
-                                            placeholder="Quantity"
-                                            max="{{ $item->associatedModel->inStock }}"
-                                            min="1"
-                                            class="form-control"
-                                        >
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-sm btn-outline-success">Update</button>
+                            @php
+                                $totalProduct = $item->price * $item->qty;
+                                $total += $totalProduct;
+                            @endphp
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>
+                                    <img width="80px" src="{{ $item->attributes['image'] ?? asset('path/to/default/image.jpg') }}" alt="">
+                                </td>
+                                <td>{{ $item->product_name }}</td>
+                                <td>
+                                    <form action="{{ route('cart.update', $item->id) }}" method="post">
+                                        @if ($errors->has('qty'))
+                                        <div class="alert alert-danger" role="alert">
+                                        {{ $errors->first('qty') }}
                                         </div>
-                                    </div>
+                                        @endif
+                                        @csrf
+                                        @method('patch')
+                                        <input type="number" name="qty" value="{{ $item->qty }}" min="1"  />
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                    </form>
+                                </td>
+                                <td>{{ $item->price }} <i class="fa fa-solid fa-dollar"></i></td>
+                                <td>{{ $totalProduct }} <i class="fa fa-solid fa-dollar"></i></td>
+                                <td>
+                                    <form action="{{ route('cart.remove', $item->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                    </form>
+                                    
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" align="right"><strong>Total</strong></td>
+                            <td>{{ $total }} <i class="fa fa-solid fa-dollar"></i></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="right">
+                                <form action="{{ route('cart.store') }}" method="post">
+                                    @csrf
+                                    <input type="submit" class="btn btn-success" name="valider" value="Validate Order">
+                                    <input onclick="return confirm('Are you sure you want to empty the cart?')" type="submit" class="btn btn-danger" name="vider" value="Empty Cart">
                                 </form>
                             </td>
-                            <td>{{ $item->price }} $</td>
-                            <td>{{ $item->price * $item->quantity }} $</td>
-                            <td>
-                                <div class="d-flex">
-                                    <form class="form-inline mr-1" action="{{ route('remove.cart', $item->associatedModel->slug) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Remove</button>
-                                    </form>
-                                    <a href="{{ route('product.details', $item->associatedModel->slug) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
-                                </div>
-                            </td>
                         </tr>
-                        @endforeach
-                        <!-- ... Ligne pour le total ... -->
-                    </tbody>
+                    </tfoot>
                 </table>
-            </div>
-            @if(Cart::Subtotal() > 0)
-            <div class="form-group text-center">
-                <a href="{{ route('make.payment') }}" class="btn btn-primary mt-3">
-                    Pay {{ Cart::Subtotal() }} $ via PayPal
-                </a>
-            </div>
-            @else
-            <div class="text-center mt-3">
-                <p>Your cart is empty.</p>
-                <a href="{{ url('/catalogue-produits') }}" class="btn btn-primary">Continue Shopping</a>
-            </div>
             @endif
         </div>
     </div>

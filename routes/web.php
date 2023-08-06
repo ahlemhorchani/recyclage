@@ -57,13 +57,11 @@ Route::get('/admin/products', [AdminController::class,'getProducts'])->name('adm
 Route::get('/admin/orders', [AdminController::class,'getOrders'])->name('admin.orders');
 //orders routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::patch('/cart/{cart}', [CartController::class, 'updateProductOnCart'])->name('cart.update');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::post('/cart/add', [CartController::class, 'addProductToCart'])->name('add.cart');
-Route::post('/cart/remove', [CartController::class, 'removeProductFromCart'])->name('remove.cart');
-Route::post('/cart/update', [CartController::class, 'updateProductOnCart'])->name('update.cart');
+Route::delete('/cart/{product}', [CartController::class, 'removeProductFromCart'])->name('cart.remove');
+
 // routes/web.php
 
 // Route pour afficher la vue d'accueil (index)
@@ -75,6 +73,11 @@ Route::get('/ajouter-categorie-produit', function () {
 Route::get('/add-category', function () {
     return view('ajouter-categorie-produit.add_category');
 })->name('add-category');
+Route::get('/produits', function () {
+    return view('ajouter-categorie-produit.produits');
+})->name('produits');
+
+
 Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('add_category');
 
 // Route pour afficher la vue d'ajout de produit
@@ -82,8 +85,11 @@ Route::get('/add-product', [ProductController::class, 'create'])->name('add-prod
 Route::post('/add-product', [ProductController::class, 'store'])->name('store_product');
 
 // Autres routes liées au CategoryController et ProductController si nécessaires
-Route::put('/update-category/{category}', [CategoryController::class, 'update'])->name('updateCategory');
-Route::put('/update-product/{product}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+Route::patch('/update-category/{category}', [CategoryController::class, 'update'])->name('updateCategory');
+Route::patch('/update-product/{product}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+// routes/web.php
+Route::get('/produits', [ProductController::class, 'productList']);
+
 
 
 

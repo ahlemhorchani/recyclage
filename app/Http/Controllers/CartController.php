@@ -9,52 +9,73 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    //return cart items
+    // Retourner les articles du panier
     public function index()
     {
-        return view("cart.index")->with([
-            "items" => Cart::all()
-        ]);
+        // Récupérer les articles du panier pour l'utilisateur actuellement connecté
+        $items = Cart::where('user_id', Auth::user()->id)->get();
+        
+        // Calculer le total des produits dans le panier
+        $total = $items->sum(function ($item) {
+            return $item->price * $item->qty;
+        });
+
+        return view("cart.index", compact('items', 'total'));
     }
 
-    //add item to cart
+    // Ajouter un article au panier
     public function addProductToCart(Request $request, Product $product)
     {
-        $prod = Product::where('id',$request->all()['id'])->get();
+        $prod = Product::where('id', $request->input('id'))->first();
+        if ($prod) {
+            Cart::create([
+                "user_id" => Auth::user()->id,
+                "id" => $prod->id,
+                "product_name" => $prod->title,
+                "price" => (double)$prod->price,
+                "qty" => (int)$request->input('qty'),
+                "total" => (double)$prod->price * (int)$request->input('qty'),
+                "attributes" => [
+                    "image" => $prod->image,
+                ],
+            ]);
+        }
+        return redirect()->route("cart.index");
+    }
+
+    // Mettre à jour un article dans le panier
+    public function updateProductOnCart(Request $request, $id)
+    {   
+        $rules = [
+            'qty' => 'required|integer|min:1',
+        ];
+        $request->validate($rules);
+        $cart = Cart::findOrFail($id);
+        $qty = (int)$request->input('qty');
+    
+        // Vérifier si la nouvelle quantité est valide (supérieure à 0)
+        if ($qty > 0) {
+            $cart->update([
+                'qty' => $qty,
+                'total' => (double)$cart->price * $qty,
+            ]);
+    
+            return redirect()->route("cart.index");
+        } else {
+            // Gérer le cas où la quantité est invalide (<= 0)
+            return redirect()->back()->with('error', 'Invalid quantity. Please enter a valid quantity greater than 0.');
+        }
         
-        Cart::create(array(
-            "user_id"=>Auth::user()->id,
-            "id" => $request->all()['id'],
-            "product_name" => $prod[0]['title'],
-            "price" => (double)$prod[0]['price'],
-            "qty" => (int)$prod[0]['qty'],
-            
-            "total"=>(double)$prod[0]['price']*(int)$request->all()['qty']
-            
-           
-        ));
-        return redirect()->route("cart.index");
     }
+    
 
-    //update item on cart
-    public function updateProductOnCart(Request $request, Product $product)
+    // Supprimer un produit du panier
+    public function removeProductFromCart($id)
     {
-             Cart::update($product->id, array(
-                   'quantity' => array(
-                   'relative' => false,
-                   'value' => $request->qty
-            ),
-        ));
-        return redirect()->route("cart.index");
-    }
-
-  // Supprimer un produit du panier
-public function removeProductFromCart(Product $product)
-{
-    Cart::remove($product->id);
-    return redirect()->route("cart.index")->with('success', 'Product has been removed from the cart successfully.');
+          $cart = Cart::findOrFail($id);
+          $cart->delete();
+      
+          return redirect()->route("cart.index");
+        
+      }
 }
-
-}
-
-

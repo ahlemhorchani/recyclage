@@ -38,7 +38,7 @@
             <input type="checkbox" class="form-control" name="certife" value="1">
 
             <label class="form-label">Certification Date</label>
-            <input type="date" class="form-control" name="datecetif">
+            <input type="date" class="form-control" name="datecetif" required>
 
             <!-- New field: Category -->
             <label class="form-label">Category</label>
@@ -48,11 +48,7 @@
                 <option value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
         </select>
-
-            <!-- New field: Date Creation (nullable) -->
-            <label class="form-label">Date Creation</label>
-            <input type="date" class="form-control" name="date_creation">
-
+        <!-- New field: Date Creation (nullable) -->
             <input type="submit" value="Add Product" class="btn btn-primary my-2" name="store_product">
         </form>
     </div>
