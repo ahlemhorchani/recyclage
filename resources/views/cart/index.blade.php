@@ -39,6 +39,7 @@
                             $total = 0;
                         @endphp
                         @foreach ($items as $item)
+                        
                             @php
                                 $totalProduct = $item->price * $item->qty;
                                 $total += $totalProduct;
@@ -50,7 +51,7 @@
                                 </td>
                                 <td>{{ $item->product_name }}</td>
                                 <td>
-                                    <form action="{{ route('cart.update', $item->id) }}" method="post">
+                                    <form action="{{ url('cart/'.$item->id.'/'.$item->product_id) }}" method="post">
                                         @if ($errors->has('qty'))
                                         <div class="alert alert-danger" role="alert">
                                         {{ $errors->first('qty') }}
@@ -58,8 +59,19 @@
                                         @endif
                                         @csrf
                                         @method('patch')
-                                        <input type="number" name="qty" value="{{ $item->qty }}" min="1"  />
+                                        <input type="number" name="qty" value="{{ $item->qty }}" min="1"  max="{{ $item->inStock }}"/>
                                         <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                        @if (session('error'))
+                                        <script>
+                                        document.getElementById('err_{{session("error")}}').style.display = 'block'
+                                        
+                                        
+                                        </script>
+                                        @endif
+                                        <div id="err_{{$item->id}}" class="msgerr alert alert-danger">
+                                        The requested quantity is not available in stock.
+                                        </div>
+
                                     </form>
                                 </td>
                                 <td>{{ $item->price }} <i class="fa fa-solid fa-dollar"></i></td>

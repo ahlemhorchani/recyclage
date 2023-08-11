@@ -14,15 +14,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-    
-        return view('ajouter-categorie-produit.produits', compact('product'));
+        return view('ajouter-categorie-produit.produits', compact('products'));
     }
     
     public function create()
     {
-        $categories = Category::all(); // Retrieve all categories from the database
-
-        // Pass the categories to the view along with the form
+        $categories = Category::all();
         return view('ajouter-categorie-produit.ajouter_produit', compact('categories'));
     }
     public function store(Request $request)
@@ -50,55 +47,53 @@ class ProductController extends Controller
         $product->inStock = $request->input('inStock');
         $product->image = $filename;
         $product->certife = $request->has('certife') ? true : false; // Assuming 'certife' is a checkbox field
-        
         $product->datecetif = $request->input('datecetif');
         $product->category_id = $request->input('category_id');
         $product->date_creation = date('Y-m-d H:i:s'); // Assuming 'date_creation' is a date field
         $product->save();
     
-        return redirect()->route('produits')->with('success', 'Product added successfully.');
+        return redirect()->route('ajouter-categorie-produit.produits')->with('success', 'Product added successfully.');
     }
-    public function productList()
-    {
-        $products = Product::all(); // Suppose que vous avez un modèle "Product" pour les produits
-        return view('ajouter-categorie-produit.produits', compact('products'));
-    }
+  
     public function show()
     {
         
     }
 
     
-    public function edit(Product $product)
+    public function edit(Product $product, Request $request)
     {
-        //
+        $product = Product::find($request->all()['id']);
+
+         $request->validate([
+            'title' => 'required',
+            'price' => 'required|numeric|min:0',
+            'inStock' => 'required|numeric|min:0',
+            'description' => 'nullable',
+            'category_id'=>'required', 
+            'date_creation' => 'nullable|date',
+            
+        ]);
+        $product->title = $request->input('title');
+        $product->price = $request->input('price');
+        $product->inStock = $request->input('inStock');
+        $product->description = $request->input('description');
+        $product->category_id = $request->input('category_id');
+        $product->date_creation = $request->input('date_creation');
+        $product->save();
+       return redirect('/produits');
     }
+    
 
    
-
-public function updateProduct(Request $request,$id)
-{
+    public function updateProduct(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $categories = Category::get();
+        return view('ajouter-categorie-produit.editprod',compact('product','categories'));
+    }
     
-    $products = Product::all();
-    $product = Product::find($id);
-
     
-    // Mettez à jour les attributs du produit avec les nouvelles valeurs du formulaire
-    $product->title = $request->input('title');
-    $product->price = $request->input('price');
-    $product->inStock = $request->input('inStock');
-    $product->description = $request->input('description');
-    $product->certified = $request->input('certife', false);
-    $product->certification_date = $request->input('datecetif');
-    $product->category_id = $request->input('category_id');
-    $product->date_creation = $request->input('date_creation');
-    
-    // Sauvegardez les modifications dans la base de données
-    $product->save();
-
-    // Redirigez l'utilisateur vers une autre page (par exemple, la liste des produits)
-    return view('ajouter-categorie-produit.editprod', compact('product'));
-}
 
 
     /**
@@ -110,6 +105,6 @@ public function updateProduct(Request $request,$id)
   
     $product->delete();
 
-    return redirect()->route('products')->with('success', 'product deleted successfully');
+    return redirect()->route('ajouter-categorie-produit.produits')->with('success', 'product deleted successfully');
 }
 }

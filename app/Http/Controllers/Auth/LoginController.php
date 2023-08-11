@@ -49,9 +49,9 @@ class LoginController extends Controller
     { 
      $user=User::where('username',$request->all()['username'])->get();
      if(($user[0]['usertype'])=='client')
-     return redirect()->route('catalogue-produits');
+     return redirect('/catalogue-produits') ;
      else
-     return redirect()->route('ajouter-categorie-produit');
+     return redirect('/ajouter-categorie-produit') ;
     }
         
         else

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
+use App\Models\Product;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
  */
@@ -24,6 +25,9 @@ class OrderFactory extends Factory
             'delivered' => $this->faker->boolean(),
             'user_id' => function () {
                 return User::factory()->create()->id;
+            },
+            'product_id' => function () {
+                return Product::factory()->create()->id;
             },
         ];
     }

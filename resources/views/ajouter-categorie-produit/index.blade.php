@@ -1,4 +1,3 @@
-<!-- resources\views\ajouter-categorie-produit\index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -10,6 +9,17 @@
         </div>
         <div class="col-md-6">
             <button class="btn btn-success btn-lg btn-block" onclick="redirectTo('{{ route('add-product') }}')">Add Product</button>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-primary btn-lg btn-block" onclick="redirectTo('{{ route('ajouter-categorie-produit.categorie') }}')">List Category </button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-success btn-lg btn-block" onclick="redirectTo('{{ route('ajouter-categorie-produit.produits') }}')">List Product</button>
         </div>
 
     </div>

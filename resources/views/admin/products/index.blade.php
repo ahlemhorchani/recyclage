@@ -7,8 +7,7 @@
             @include('layouts.sidebar')
         </div>
         <div class="col-md-8">
-            <a
-                href="{{ route("products.create") }}"
+            <a href="{{ route('add-product') }}" 
                 class="btn btn-primary my-2">
                     <i class="fa fa-plus"></i>
             </a>

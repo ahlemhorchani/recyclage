@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -62,6 +63,14 @@ class AdminController extends Controller
     {
         return view("admin.orders.index")->with([
             "orders" => Cart::latest()->paginate(5)
+        ]);
+    }
+    public function getUsers()
+    {     $users = User::latest()->paginate(5);
+
+        return view("admin.users.index")->with([
+            "users" => $users
+        
         ]);
     }
 }

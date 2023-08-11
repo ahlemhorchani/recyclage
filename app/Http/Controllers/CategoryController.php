@@ -28,7 +28,8 @@ class CategoryController extends Controller
      }
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('ajouter-categorie-produit.categorie', compact('categories'));
     }
 
     /**
@@ -61,43 +62,39 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('categories.edit', compact('category'));
+        return view('ajouter-categorie-produit.editcat', compact('category'));
     }
 
     
   
-public function update(Request $request, $id)
-{
-    $category = Category::find($id);
+  
+    public function update(Request $request, Category $category)
+    {
+        $category = Category::find($request->all()['id']);
+        
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string',
+        ]);
+        
 
-    if (!$category) {
-        return redirect()->route('categories.index')
-            ->with('error', 'Category not found.');
+        // Mettre à jour les attributs de la catégorie avec les nouvelles valeurs du formulaire
+        $category->title= $request->input('title');
+        $category->slug = $request->input('slug');
+
+        // Enregistrer les modifications dans la base de données
+        $category->save();
+
+        // Rediriger l'utilisateur vers la liste des catégories avec un message de succès
+        return redirect('/categorie')->with('success', 'Category updated successfully');
     }
 
-    $request->validate([
-        'title' => 'required',
-        'slug' => 'required',
-    ]);
-
-    $category->update([
-        "title" => $request->input('title'),
-        "slug" => $request->input('slug'),
-    ]);
-
-    return redirect()->route('categories.index')
-        ->with('success', 'Category updated successfully.');
-
-}
-    /**
-     * Update the specified resource in storage.
-     */
-   
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
+    public function destroy(Category $category,$id)
     {
-        //
+        $category = Category::findOrFail($id);
+  
+        $category->delete();
+    
+        return redirect()->route('ajouter-categorie-produit.categorie')->with('success', 'product deleted successfully');
     }
 }
