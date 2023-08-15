@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+@include('partials.nav')
     <h1>Add Category or Product</h1>
     <div class="row">
         <div class="col-md-6">

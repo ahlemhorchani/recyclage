@@ -15,7 +15,7 @@
             @if ($items->isEmpty())
                 <div class="alert alert-warning" role="alert">
                     Your cart is empty!
-                    Start shopping <a class="btn btn-success btn-sm" href="{{ route('catalogue-produits.index') }}">Buy Products</a>
+                    Start shopping <a class="btn btn-success btn-sm" href="{{ route('catalogue-produits') }}">Buy Products</a>
                 </div>
             @else
                 @php
@@ -77,11 +77,16 @@
                                 <td>{{ $item->price }} <i class="fa fa-solid fa-dollar"></i></td>
                                 <td>{{ $totalProduct }} <i class="fa fa-solid fa-dollar"></i></td>
                                 <td>
+                                <form action='{{ route('cart.validate',  $item->id) }}' method="get">
+                                @csrf
+                                    <button type="submit" class="btn btn-success" name="valider">Validate Order</button>
+                                </form>
                                     <form action="{{ route('cart.remove', $item->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                     </form>
+
                                     
                                     
                                 </td>
@@ -96,11 +101,15 @@
                         </tr>
                         <tr>
                             <td colspan="6" align="right">
-                                <form action="{{ route('cart.store') }}" method="post">
-                                    @csrf
-                                    <input type="submit" class="btn btn-success" name="valider" value="Validate Order">
-                                    <input onclick="return confirm('Are you sure you want to empty the cart?')" type="submit" class="btn btn-danger" name="vider" value="Empty Cart">
+                               <form action='{{ route('cart.validate',  $item->id) }}' method="get">
+                                @csrf
+                                    <button onclick="return confirm('Are you sure you want to validate this order?')" type="submit" class="btn btn-success" name="valider">Validate Cart</button>
                                 </form>
+                                <form action="{{ route('cart.clear') }}" method="get">
+                                @csrf
+                                    <button onclick="return confirm('Are you sure you want to empty the cart?')" type="submit" class="btn btn-danger" name="vider">Empty Cart</button>
+                                </form>
+
                             </td>
                         </tr>
                     </tfoot>

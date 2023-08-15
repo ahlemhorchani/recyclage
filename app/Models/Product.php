@@ -14,10 +14,10 @@ class Product extends Model
         'description' ,
         'price' ,
         'inStock' ,
-        'image',
+        'image','discount',
         'certife' ,
         'datecetif','date_creation',
-        'category_id'] ;
+        'category_id', 'user_id'] ;
         public function getRouteKeyName()
         {
             return'slug' ;
@@ -32,6 +32,11 @@ class Product extends Model
         {
             return self::query()->orderBy('date_creation', 'desc')->get();
         }
+        public function user()
+         {
+           return $this->belongsTo(User::class);
+        }
+
     
     
 }

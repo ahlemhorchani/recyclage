@@ -24,7 +24,7 @@ class CategoryController extends Controller
              "slug" => $request->input('slug'),
          ]);
      
-         return redirect()->route('categories.index')->with('success', 'Category added successfully.');
+         return redirect()->route('ajouter-categorie-produit.categorie')->with('success', 'Category added successfully.');
      }
     public function index()
     {
@@ -95,6 +95,14 @@ class CategoryController extends Controller
   
         $category->delete();
     
-        return redirect()->route('ajouter-categorie-produit.categorie')->with('success', 'product deleted successfully');
+        return redirect()->route('ajouter-categorie-produit.categorie')->with('success', 'Category deleted successfully');
+    }
+    public function ddestroy(Category $category,$id)
+    {
+        $category = Category::findOrFail($id);
+  
+        $category->delete();
+    
+        return redirect()->route('admin.index')->with('success', 'Category deleted successfully');
     }
 }

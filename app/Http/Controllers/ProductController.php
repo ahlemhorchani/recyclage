@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function index()
@@ -24,6 +25,8 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+        $product = new Product();
+
         $request->validate([
             'title' => 'required',
             'price' => 'required|numeric|min:0',
@@ -40,10 +43,12 @@ class ProductController extends Controller
         }
     
         $product = new Product();
+        $product->user_id = Auth::user()->id;
         $product->title = $request->input('title');
         $product->slug = Str::slug($request->input('title'));
         $product->description = $request->input('description');
         $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
         $product->inStock = $request->input('inStock');
         $product->image = $filename;
         $product->certife = $request->has('certife') ? true : false; // Assuming 'certife' is a checkbox field
@@ -68,6 +73,7 @@ class ProductController extends Controller
          $request->validate([
             'title' => 'required',
             'price' => 'required|numeric|min:0',
+            'discount' => 'required|numeric|min:0',
             'inStock' => 'required|numeric|min:0',
             'description' => 'nullable',
             'category_id'=>'required', 
@@ -76,6 +82,7 @@ class ProductController extends Controller
         ]);
         $product->title = $request->input('title');
         $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
         $product->inStock = $request->input('inStock');
         $product->description = $request->input('description');
         $product->category_id = $request->input('category_id');
@@ -93,7 +100,8 @@ class ProductController extends Controller
         return view('ajouter-categorie-produit.editprod',compact('product','categories'));
     }
     
-    
+
+
 
 
     /**
@@ -106,5 +114,13 @@ class ProductController extends Controller
     $product->delete();
 
     return redirect()->route('ajouter-categorie-produit.produits')->with('success', 'product deleted successfully');
-}
+    }
+    public function ddestroy(Product $product,$id)
+    {
+    $product = Product::findOrFail($id);
+  
+    $product->delete();
+
+    return redirect()->route('admin.index')->with('success', 'product deleted successfully');
+    }
 }

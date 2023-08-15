@@ -7,10 +7,7 @@
             @include('layouts.sidebar')
         </div>
         <div class="col-md-8">
-            <a href="{{ route('add-product') }}" 
-                class="btn btn-primary my-2">
-                    <i class="fa fa-plus"></i>
-            </a>
+            
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -19,6 +16,8 @@
                         <th>Description</th>
                         <th>Qty</th>
                         <th>Price</th>
+                        <th>User ID</th>
+                        <th>User Name</th>
                         <th>In Stock</th>
                         <th>Image</th>
                         <th>Category</th>
@@ -34,12 +33,19 @@
                             <td>{{ $product->inStock }}</td>
                             <td>{{ $product->price }} DH</td>
                             <td>
+                                {{ $product->user->id }}
+                            </td>
+                            <td>
+                                {{ $product->user->name }}
+                            </td>
+                            <td>
                                 @if($product->inStock > 0)
                                     <i class="fa fa-check text-success"></i>
                                 @else
                                     <i class="fa fa-times text-danger"></i>
                                 @endif
                             </td>
+
                             <td>
                                 <img src="{{ asset($product->image) }}"
                                      alt="{{ $product->title }}"
@@ -52,23 +58,20 @@
                                 {{ $product->category->title }}
                             </td>
                             <td class="d-flex flex-row justify-content-center align-items-center">
-                                <a
-                                    href="{{ route("products.edit",$product->slug) }}"
-                                    class="btn btn-sm btn-warning mr-2">
-                                        <i class="fa fa-edit"></i>
-                                </a>
-                                <form id="{{ $product->id }}" method="POST" action="{{ route("products.destroy",$product->slug) }}">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button
-                                    onclick="event.preventDefault();
-                                       if(confirm('Do you really want to delete {{ $product->title  }} ?'))
-                                        document.getElementById({{ $product->id }}).submit();
-                                    "
-                                    class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
+                               
+                            <button class="btn btn-sm btn-success">
+                                        <i class="fa fa-check"></i>
                                     </button>
-                                </form>
+
+
+                                <form action="{{ route('product.destroy', $product->id) }}" method="POST" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                    @csrf
+                                    @method('DELETE')
+                                      <button class="btn btn-sm btn-danger">
+                                          <i class="fa fa-trash"></i>
+                                       </button>
+                                    </form>
+
                             </td>
                         </tr>
                     @endforeach

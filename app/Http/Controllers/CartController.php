@@ -26,7 +26,14 @@ class CartController extends Controller
     public function addProductToCart(Request $request, Product $product)
     {
         $prod = Product::where('id', $request->input('id'))->first();
+        
         if ($prod) {
+            $qty = (int)$request->input('qty');
+            
+            // Si la quantité est vide ou nulle, attribuer une valeur par défaut de 1
+            if ($qty <= 0) {
+                $qty = 1;
+            }
             Cart::create([
                 "user_id" => Auth::user()->id,
                 "product_id" => $prod->id,
@@ -40,7 +47,22 @@ class CartController extends Controller
         }
         return redirect()->route("cart.index");
     }
-    
+    public function validateOrder($orderId)
+    {
+        $cartItem = Cart::find($orderId);
+
+        if (!$cartItem) {
+            return redirect()->back()->with('error', 'Cart item not found.');
+        }
+
+        // Mettre à jour les champs "delivered" et "paid" du panier
+        $cartItem->update([
+            'delivered' => true, // Remplacez par la logique appropriée
+            'paid' => true,      // Remplacez par la logique appropriée
+        ]);
+
+        return redirect()->route("cart.index")->with('success', 'Order has been validated.');
+    }
 
     public function updateProductOnCart(Request $request, $id, $product_id)
 {
@@ -85,4 +107,10 @@ class CartController extends Controller
           return redirect()->route("cart.index");
         
       }
+      public function clearCart()
+    {
+        Cart::where('user_id', Auth::user()->id)->delete();
+        return redirect()->route("cart.index")->with('success', 'Cart has been cleared.');
+    }
+
 }

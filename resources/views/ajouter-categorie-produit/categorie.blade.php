@@ -30,7 +30,7 @@
                         <td class="align-middle">
                              <div class="btn-group" role="group" aria-label="Basic example">
                               <a href="{{url('update-category/'.$category->id)}}" class="btn btn-warning">Edit</a>&nbsp;
-                             <form action="{{ route('destroy',$category->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                              <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                 @csrf
                                 @method('DELETE')
                              <button class="btn btn-danger m-0">Delete</button>

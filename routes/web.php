@@ -10,6 +10,7 @@ use App\Http\Controllers\AjouterCategorieProduitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Category;
 
@@ -34,6 +35,7 @@ Auth::routes();
 Route::post('/SubmitLogin',[LoginController::class, 'Authenticate']);
 Route::middleware('auth')->group(function () {
 Route::get('/catalogue-produits', [CatalogueProduitsController::class, 'index'])->name('catalogue-produits');
+Route::get('/catalogue-produits/{id}', [CatalogueProduitsController::class, 'showCatalogue'])->name('catalogue-produits-category');
 Route::get('/ajouter-categorie-produit', [AjouterCategorieProduitController::class, 'index'])->name('ajouter-categorie-produit');
 });
 Route::get('/about',  [HomeController::class, 'index'])->name('home');
@@ -58,15 +60,16 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 Route::get('/admin/products', [AdminController::class,'getProducts'])->name('admin.products');
 Route::get('/admin/orders', [AdminController::class,'getOrders'])->name('admin.orders');
 Route::get('/admin/users', [AdminController::class,'getUsers'])->name('admin.users');
+Route::get('/admin/categories', [AdminController::class,'getCategories'])->name('admin.categories');
+
 //orders routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::patch('/cart/{cart}/{product}', [CartController::class, 'updateProductOnCart'])->name('cart.update');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::post('/cart/add', [CartController::class, 'addProductToCart'])->name('add.cart');
 Route::delete('/cart/{product}', [CartController::class, 'removeProductFromCart'])->name('cart.remove');
-
-// routes/web.php
-
+Route::get('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+Route::get('/cart/validate/{orderId}', [CartController::class, 'validateOrder'])->name('cart.validate');
 // Route pour afficher la vue d'accueil (index)
 Route::get('/ajouter-categorie-produit', function () {
     return view('ajouter-categorie-produit.index');
@@ -95,9 +98,17 @@ Route::patch('/update', [ProductController::class, 'edit'])->name('update.Produc
 // routes/web.php
 Route::get('/produits', [ProductController::class, 'index'])->name('ajouter-categorie-produit.produits');
 Route::get('/categorie', [CategoryController::class, 'index'])->name('ajouter-categorie-produit.categorie');
-Route::delete('p-destroy/{id}', [ProductController::class, 'destroy'])->name('p-destroy');
-Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+Route::delete('prod-destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::delete('p-destroy/{id}', [ProductController::class, 'ddestroy'])->name('product.destroy');
+Route::delete('categ-destroy/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::delete('c-destroy/{id}', [CategoryController::class, 'ddestroy'])->name('categorie.destroy');
+
+Route::delete('destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::post('/submit-product-for-approval', [ProductController::class, 'submitProductForApproval'])->name('submit_product_for_approval');
+Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])
+    ->name('admin.settings');
+
 
 

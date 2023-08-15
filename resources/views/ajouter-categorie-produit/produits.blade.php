@@ -3,7 +3,10 @@
 @section('content')
     <div class="d-flex align-items-center justify-content-between">
 <h1 class="mb-0">List Product </h1>
-<a href="{{ route('add-product') }}" class="btn btn-primary">Add Product</a>
+<a href="{{ route('add-product') }}" 
+                class="btn btn-primary my-2">
+                    <i class="fa fa-plus"></i>
+            </a>
   </div>
   @if(Session::has('success'))
        <div class="alert alert-success" role="alert">
@@ -44,9 +47,9 @@
                               
                                    <a href="{{url('update-product/'.$product->id)}}" class="btn btn-warning">Edit</a>&nbsp;
                               
-                             <form action="{{ route('p-destroy', $product->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
-                                @csrf
-                                @method('DELETE')
+                             <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                    @csrf
+                                    @method('DELETE')
                              <button class="btn btn-danger m-0">Delete</button>
                              </form>
                              </div>

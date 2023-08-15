@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->String ('product_name');
             $table->String ('image')->default(0);
-            $table->integer('qty');
+            $table->integer('qty')->default(1);
             $table->decimal('price',8,2);
             $table->decimal('total',8,2);
             $table->boolean ('paid')->default(0);

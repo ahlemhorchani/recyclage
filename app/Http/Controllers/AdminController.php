@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,7 +21,9 @@ class AdminController extends Controller
     {
         return view("admin.index")->with([
             "products" => Product::all(),
-            "orders" => Cart::all()
+            "orders" => Cart::all(),
+            "categories" => Category::all(),
+            "users" => User::all()
         ]);
     }
 
@@ -73,4 +76,10 @@ class AdminController extends Controller
         
         ]);
     }
+    public function getCategories()
+    {      return view("admin.categories.index")->with([
+        "categories" => Category::latest()->paginate(5)
+    ]);
+    }
+    
 }

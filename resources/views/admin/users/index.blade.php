@@ -35,9 +35,9 @@
                             </td>
                             <td>{{ $user->usertype }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                                 <button class="btn btn-sm btn-success">
+                                        <i class="fa fa-check"></i>
+                                    </button>
                                 <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

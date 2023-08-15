@@ -45,14 +45,14 @@
                                 @endif
                             </td>
                             <td class="d-flex flex-row justify-content-center align-items-center">
-                                <form method="POST" action="{{ route("orders.update",$order->id) }}">
+                                <form method="POST">
                                     @csrf
                                     @method("PUT")
                                     <button class="btn btn-sm btn-success">
                                         <i class="fa fa-check"></i>
                                     </button>
                                 </form>
-                                <form id="{{ $order->id }}" method="POST" action="{{ route("orders.destroy",$order->id) }}">
+                                <form id="{{ $order->id }}" method="POST" >
                                     @csrf
                                     @method("DELETE")
                                     <button

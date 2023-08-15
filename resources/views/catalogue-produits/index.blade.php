@@ -27,9 +27,8 @@
                                 $active = $categoryId === $categorie->id ? $activeClasses : '';
                             @endphp
                             <li class="list-group-item {{ $active }}">
-                                <a class="btn btn-default w-100"
-                                    href="{{ url('/catalogue-produits', ['id' => $categorie->id]) }}">
-                                    <i class="fa {{ $categorie->icone }}"></i> {{ $categorie->title }}
+                                <a class="btn btn-default w-100" href="{{ route('catalogue-produits-category', ['id' => $categorie->id]) }}">
+                                 <i class="fa {{ $categorie->icone }}"></i> {{ $categorie->title }}
                                 </a>
                             </li>
                         @endforeach
@@ -37,19 +36,32 @@
                 </div>
                 <div class="col mt-4">
                     <div class="row">
+                   
                         @foreach ($produits as $produit)
                             <!-- Affichage des produits -->
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <img src="{{ url('upload/produit/'.$produit->image) }}" class="card-img-top" alt="{{ $produit->title }}">
+                            <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                                <?php if (!empty($produit->discount)): ?>
+                                         <span class="badge rounded-pill text-bg-warning w-25 position-absolute m-2" style="right:0">
+                                          - <?= $produit->discount ?> <i class="fa fa-percent"></i>
+                                          </span>
+                                          <?php endif; ?>
+
+                                    <img class="card-img-top w-75 mx-auto" src="{{ url('upload/produit/'.$produit->image) }}" alt="Card image cap">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $produit->title }}</h5>
+                                       <p><b> <h5> {{ $produit->title }}</h5></b></p>
                                         <p class="card-text">{{ $produit->description }}</p>
-                                        <p class="card-text">Price : {{ $produit->price }} €</p>
+                                        
                                         <p class="card-text">InStock : {{ $produit->inStock}}</p>
                                         <p class="card-text">certify : {{ $produit->certife}}</p>
                                         <p class="card-text">Certification Date : {{ $produit->datecetif}}</p>
+                                        
                                     </div>
+                                    <div class="card-footer bg-white" style="z-index: 10">
+                                     <div class="h5"><span class="badge rounded-pill text-bg-success">
+                                     {{ $produit->price }} <i class="fa fa-solid fa-dollar"></i>
+                                     </span></div>
+                                     </div>
                                       <div>
         @php
             $idUtilisateur = Auth::check() ? Auth::user()->id : 0;
@@ -63,7 +75,7 @@
         @csrf
        <button class="btn btn-primary mx-2 counter-moins" type="button">-</button>
       <input type="hidden" name="id" value="{{ $produit->id }}">
-      <input class="form-control" value="{{ $qty }}" type="number" name="qty" id="qty" max="99">
+      <input class="form-control" value="{{ $qty }}" type="number" name="qty" id="qty"  min="1" max="99" placeholder="1">
     <button class="btn btn-primary mx-2 counter-plus mx-1" type="button">+</button>
 
     <button class="btn btn-success btn-sm" type="submit" name="ajouter">

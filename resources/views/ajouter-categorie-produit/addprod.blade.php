@@ -16,10 +16,8 @@
             </div>
         @endif
 
-        <form method="post" action="{{ route('store_product') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('submit_product_for_approval') }}" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-
 
             <label class="form-label">Title</label>
             <input type="text" class="form-control" name="title">
@@ -53,12 +51,8 @@
                 <option value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
         </select>
-        <!-- New field: Date Creation (nullable) -->
-            <input type="submit" value="Add Product" class="btn btn-primary my-2" name="store_product">
-        </form>
+          <input type="submit" value="Submit for Approval" class="btn btn-primary my-2" name="submit_product">
+         </form>
     </div>
 </div>
 @endsection
-
-
-

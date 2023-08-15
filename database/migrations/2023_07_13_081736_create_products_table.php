@@ -18,19 +18,16 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->decimal('price', 8, 2)->default(0);
             $table->integer('inStock')->default(0);
+            $table->integer('discount')->default(0);
             $table->string('image');
             $table->boolean('certife')->nullable()->default(false);
             $table->date('datecetif');
             $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
-           
- 
-        $table->date('date_creation')->nullable();
-   
-
-
-            // foreign key constraint
+            $table->date('date_creation')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
