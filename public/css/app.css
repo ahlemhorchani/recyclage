@@ -1,0 +1,62 @@
+.form-control {
+   background-color: #b0f2b6; /* Arrière-plan vert pour les champs de formulaire */
+   color: white; /* Texte blanc pour les champs de formulaire */
+}
+
+/* Styles spécifiques pour le bouton d'inscription */
+.btn-block {
+   background-color: green; /* Arrière-plan vert pour le bouton */
+   border-color: green; /* Bordure verte pour le bouton */
+   color: white; /* Texte blanc pour le bouton */
+}
+/* Modifier la couleur d'arrière-plan du formulaire en vert d'eau */
+.auth-page {
+   background-color: #7FFFD4; /* Vert d'eau */
+}
+
+/* Modifier la couleur du bouton d'inscription en vert poireau */
+.btn-block.btn-primary {
+   background-color: #4ca66b; /* Vert poireau */
+   border-color: #4ca66b; /* Vert poireau */
+}
+
+/* Modifier la couleur de l'icône d'utilisateur en vert lichen */
+.input-group-text .fas.fa-user {
+   color: #8DB600; /* Vert lichen */
+}
+
+/* Modifier la couleur de l'icône d'e-mail en vert lichen */
+.input-group-text .fas.fa-envelope {
+   color: #8DB600; /* Vert lichen */
+}
+
+/* Modifier la couleur de l'icône de téléphone en vert lichen */
+.input-group-text .fas.fa-phone {
+   color: #8DB600; /* Vert lichen */
+}
+
+/* Modifier la couleur de l'icône de verrouillage en vert lichen */
+.input-group-text .fas.fa-lock {
+   color: #8DB600; /* Vert lichen */
+}
+
+/* Modifier la couleur des messages d'erreur en vert poireau */
+.invalid-feedback {
+   color: #BFFF00; /* Vert poireau */
+}
+
+/* Modifier la couleur du texte de pied de page en vert lichen */
+.my-0 a {
+   color: #8DB600; /* Vert lichen */
+}
+
+/* Modifier la couleur de fond du bouton de connexion existant en vert poireau */
+.btn-block.btn-primary {
+   background-color: #4ca66b; /* Vert poireau */
+   border-color: #4ca66b; /* Vert poireau */
+}
+
+/* Modifier la couleur du texte du bouton de connexion existant en blanc */
+.btn-block.btn-primary span {
+   color: #ffffff; /* Blanc */
+}

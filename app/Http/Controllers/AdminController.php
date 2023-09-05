@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -80,6 +81,18 @@ class AdminController extends Controller
     {      return view("admin.categories.index")->with([
         "categories" => Category::latest()->paginate(5)
     ]);
+    }
+    public function votreAction()
+    {
+        
+
+        if (Auth::check()) {
+            $usertype = Auth::user()->usertype;
+        } else {
+            $usertype = null; // Définissez une valeur par défaut si l'utilisateur n'est pas connecté.
+        }
+
+        return view('votre_vue')->with('usertype', $usertype);
     }
     
 }

@@ -6,6 +6,13 @@
        Welcome to our online chemical product recycling platform! Explore our extensive selection of chemical products.
 </p></div>
   <div>
+  <div class="or-top-banner" style="background: #fff; color: #fff;">
+   <figure>
+      <img class=" ls-is-cached lazyloaded" width="80" height="80" 
+      src="/img/m.png">
+    </figure>
+    </div>
+  <div>
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
@@ -132,7 +139,7 @@
   </div>
 
 <div class="or-carousel-block">
-  <h2 class="or-title  or-title__lg">    L
+  <h2 class="or-title  or-title__lg">    Sample of chemical products
 </h2>
 
   <div class="or-carousel" data-controller="or-carousel"><div class="or-carousel__container" data-or-carousel-target="container" style="transform: translate3d(0%, 0px, 0px);">
@@ -247,15 +254,7 @@
 </div></div>
 </div>
 
-<div class="category-list-block">
-  <img sizes="100vw" alt="alt text" class=" lazyloaded"  src="\img\1.jpg">
 
-  <article>
-    <h3 class="or-title  or-title__xs">
-      des idées sur le reycla
-</h3>  
-  </article>
-</div>
 
 <div class="home-page-engagement">
   <h2 class="or-title  or-title__xl" type="secondary">

@@ -19,50 +19,14 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="./node_modules/admin-lte/dist/css/adminlte.css">
     <link rel="stylesheet" href="{{ asset('css/ad.css') }}">
-    <style>
-    
-/* Style de base pour la barre de navigation */
-.navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Style pour les liens du menu principal */
-.navbar-nav .nav-item .nav-link {
-    color: #333;
-    font-weight: 500;
-    padding: 8px 15px;
-    transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-item .nav-link:hover {
-    color: #007bff; /* Couleur de lien au survol */
-}
-
-/* Style pour les liens "Edit account" et "Deactivate account" */
-.edit-account-link,
-.deactivate-account-link {
-    font-weight: bold;
-    color: #007bff; /* Couleur du lien */
-}
-
-.edit-account-link:hover,
-.deactivate-account-link:hover {
-    text-decoration: underline; /* Soulignez les liens au survol */
-    color: #ff5733; /* Couleur de lien au survol */
-}
-
-    </style>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-            
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -71,56 +35,12 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                
                     <!-- Left Side Of Navbar -->
-                      <ul class="navbar-nav me-auto">
-                     @if(Auth::check())
-                    <?php $usertype = Auth::user()->usertype; ?>
-                     @endif
-                @if ($usertype=='vendor')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ajouter_categorie_produit') }}">
-                            {{ __('Welcome') }}
-                        </a>
-                    </li>
+                    <ul class="navbar-nav me-auto">
+                    
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('add-product') }}">
-                            {{ __('Add Product') }}
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('add-category') }}">
-                            {{ __('Add Category') }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ajouter-categorie-produit.produits') }}">
-                            {{ __('All Product') }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ajouter-categorie-produit.categorie') }}">
-                            {{ __('All Category') }}
-                        </a>
-                    </li>
-                @elseif ($usertype=='client')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('catalogue-produits') }}">
-                            {{ __('Catalog') }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart.index') }}">
-                            {{ __('Cart') }}
-                        </a>
-                    </li>
-                @endif
-            </ul>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -153,20 +73,6 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item edit-account-link"href="{{ route('add-category') }}">
-                                        {{ __('Edit account') }}
-                                        </a>
-
-                                    <form id="logout-form" action="{{ route('add-category') }}" method="POST" class="d-none">
-                                          @csrf
-                                     </form>
-                                      <a class="dropdown-item deactivate-account-link" href="{{ route('add-category') }}">
-                                        {{ __('Deactivate account') }}
-                                        </a>
-
-                                    <form id="logout-form" action="{{ route('add-category') }}" method="POST" class="d-none">
-                                          @csrf
-                                     </form>
                                      
                                     
                                    

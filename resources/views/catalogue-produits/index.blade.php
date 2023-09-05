@@ -53,7 +53,7 @@
                                         <p class="card-text">{{ $produit->description }}</p>
                                         
                                         <p class="card-text">InStock : {{ $produit->inStock}}</p>
-                                        <p class="card-text">certify : {{ $produit->certife}}</p>
+                                        <p class="card-text">certify : @if($produit->certife==0)  <i class="fa fa-times-circle"></i> @elseif($produit->certife==1) <i class="fa fa-check"></i> @endif</p>
                                         <p class="card-text">Certification Date : {{ $produit->datecetif}}</p>
                                         
                                     </div>
@@ -75,10 +75,10 @@
         @csrf
        <button class="btn btn-primary mx-2 counter-moins" type="button">-</button>
       <input type="hidden" name="id" value="{{ $produit->id }}">
-      <input class="form-control" value="{{ $qty }}" type="number" name="qty" id="qty"  min="1" max="99" placeholder="1">
+      <input class="form-control" value="{{ $qty }}" type="number" name="qty" id="qty"  min="1" max="{{$produit->inStock}}" placeholder="1" required>
     <button class="btn btn-primary mx-2 counter-plus mx-1" type="button">+</button>
 
-    <button class="btn btn-success btn-sm" type="submit" name="ajouter">
+    <button class="btn btn-success btn-sm" type="submit" name="ajouter" @if($produit->inStock < 1) disabled @endif>
         {!! $button !!}
     </button>
 

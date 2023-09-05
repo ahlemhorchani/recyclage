@@ -1,6 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.appp')
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/ad.css') }}">
+@endpush
 
 @section('content')
+ 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

@@ -34,6 +34,11 @@ class CartController extends Controller
             if ($qty <= 0) {
                 $qty = 1;
             }
+            
+            // Mettre à jour la valeur de $inStock dans la table products
+            $newInStock = $prod->inStock - $qty;
+            $prod->update(['inStock' => $newInStock]);
+    
             Cart::create([
                 "user_id" => Auth::user()->id,
                 "product_id" => $prod->id,
@@ -42,7 +47,7 @@ class CartController extends Controller
                 "price" => (double)$prod->price,
                 "qty" => (int)$request->input('qty'),
                 "total" => (double)$prod->price * (int)$request->input('qty'),
-                "attributes" => ["image" => $prod->image,],
+                "attributes" => ["image" => $prod->image],
             ]);
         }
         return redirect()->route("cart.index");

@@ -38,7 +38,7 @@
             <input type="file" class="form-control" name="image">
 
             <label class="form-label">Certified</label>
-            <input type="checkbox" class="form-control" name="certife" value="1">
+            <input type="checkbox"  name="certife" value="1"><br>
 
             <label class="form-label">Certification Date</label>
             <input type="date" class="form-control" name="datecetif" required>

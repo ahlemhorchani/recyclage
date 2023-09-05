@@ -29,6 +29,9 @@
 
             <label class="form-label">In Stock</label>
             <input type="number" class="form-control" name="inStock" min="1" value="{{ $product ['inStock']}}">
+             <label class="form-label">Discount</label>
+            <input type="number" class="form-control" name="discount" min="0" value="{{ $product ['discount']}}">
+
 
             <label class="form-label">Description</label>
             <textarea class="form-control" name="description">{{ $product ['description'] }}</textarea>

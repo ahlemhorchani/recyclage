@@ -27,7 +27,7 @@
     <li class="nav-item">
         <a href="{{url('/admin')}}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
-            <p>Accueil</p>
+            <p>Welcome</p>
         </a>
     </li>
     <li class="nav-item">
@@ -60,7 +60,7 @@
     <li class="nav-item">
         <a href="{{ route('admin.settings') }}" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
-            <p>Paramètres</p>
+            <p>Settings</p>
         </a>
     </li>
 

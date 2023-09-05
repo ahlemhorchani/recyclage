@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Paramètres</h1>
+                    <h1>Settings</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Accueil</a></li>
-                        <li class="breadcrumb-item active">Paramètres</li>
+                        <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Settings</li>
                     </ol>
                 </div>
             </div>
@@ -26,24 +26,24 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Paramètres Généraux</h3>
+                            <h3 class="card-title">General Settings</h3>
                         </div>
                         <div class="card-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="site_name">Nom du Site</label>
-                                    <input type="text" class="form-control" id="site_name" placeholder="Nom du site">
+                                    <label for="site_name">Site Name</label>
+                                    <input type="text" class="form-control" id="site_name" placeholder="Site Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="site_description">Description du Site</label>
-                                    <textarea class="form-control" id="site_description" rows="4" placeholder="Description du site"></textarea>
+                                    <label for="site_description">Site Description</label>
+                                    <textarea class="form-control" id="site_description" rows="4" placeholder="Site Description"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="site_logo">Logo du Site</label>
+                                    <label for="site_logo">Site Logo</label>
                                     <input type="file" class="form-control-file" id="site_logo">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -55,6 +55,7 @@
     <!-- /.content -->
 </div>
 @endsection
+
 <style>
 .form-group {
     margin-bottom: 20px;

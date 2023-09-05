@@ -1,0 +1,45 @@
+
+/* Modifier la couleur du bouton de connexion en vert poireau (#8DB600) */
+.btn-primary {
+   background-color: #8DB600 !important;
+   border-color: #8DB600 !important;
+}
+
+/* Modifier la couleur du texte du bouton de connexion en blanc */
+.btn-primary span {
+   color: #ffffff !important;
+}
+
+/* Modifier la couleur du texte du lien "Remember me" en vert poireau (#8DB600) */
+.form-check-label {
+   color: #8DB600 !important;
+}
+
+/* Modifier la couleur du texte des étiquettes en vert poireau (#8DB600) */
+.col-form-label {
+   color: #8DB600 !important;
+}
+
+/* Modifier la couleur de fond de la carte en vert d'eau (#7FFFD4) */
+
+
+/* Modifier la couleur de fond du formulaire en vert d'eau (#7FFFD4) */
+.card-body {
+   background-color: #fff !important;
+}
+
+/* Modifier la couleur du texte du titre de la carte en vert lichen (#b0f2b6) */
+.card-header {
+   background-color: #b0f2b6 !important;
+}
+
+/* Modifier la couleur du texte des messages d'erreur en vert poireau (#8DB600) */
+.invalid-feedback {
+   color: #8DB600 !important;
+}
+
+/* Modifier la couleur du texte du pied de page */
+.card-footer {
+   background-color: #b0f2b6 !important;
+}
+
